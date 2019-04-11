@@ -41,6 +41,8 @@ function oh_listings_cochran() {
       listing_lat varchar(150),
       listing_beachfront varchar(100),
       listing_petfriendly varchar(10),
+      listing_agent varchar(100),
+      listing_thumb varchar(100),
       listing_database_date date,
       PRIMARY KEY (ID)
     ) $charset_collate;"
@@ -132,6 +134,8 @@ function oh_listings_cochran_install_data() {
             $listing_headline= $post['headline'];
             $listing_subheadline= $post['subheadline'];
             $listing_preconstruction = $post['preconstruction'];
+            $listing_agent= $post['agent'];
+            $listing_thumb= $post['thumbnail'];
             $wpdb->insert( 
                 $table_name, 
                 array( 
@@ -155,6 +159,8 @@ function oh_listings_cochran_install_data() {
                     'listing_lat' => $listing_lat,
                     'listing_beachfront' => $listing_beachfront,
                     'listing_petfriendly' => $listing_petfriendly,
+                    'listing_agent'=> $listing_agent,
+                    'listing_thumb'=>$listing_thumb,
                     'listing_database_date' => current_time( 'mysql')
                 ) 
             );
