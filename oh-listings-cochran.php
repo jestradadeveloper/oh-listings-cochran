@@ -62,8 +62,8 @@ function oh_listings_cochran_install_data() {
     $table_name = $wpdb->prefix . 'property';
   
    
-    $filename='data/rets-api';
-    $url = 'https://masdevland.com/';
+    $filename='retslist.json';
+    $url = 'https://rets-api.herokuapp.com';
 	$datosCochranListing = wp_remote_get($url.'/'.$filename);
 	if(is_wp_error($datosCochranListing)){
 		echo  "Error al leer";
