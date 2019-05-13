@@ -52,59 +52,10 @@ function oh_listings_cochran() {
 function oh_listings_cochran_install_data() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'property';
-    /*            
-    $wpdb->insert( 
-        $table_name, 
-        array( 
-            'mls_id ' => $listing_mls, 
-            'listing_type'=> $listing_type,
-            'listing_name' => $listing_name, 
-            'listing_image' => $listing_image,      
-            'listing_link' => $listing_link,
-            'listing_preview' => $listing_preview,  
-            'listing_size'=> $listing_size,
-            'listing_location'=>$listing_location,
-            'listing_area' => $listing_area,
-            'listing_bedrooms' => $listing_bedrooms,
-            'listing_bathrooms' => $listing_bathrooms,
-            'listing_address' => $listing_address,
-            'listing_price' => $listing_price,
-            'listing_long' => $listing_long,
-            'listing_lat' => $listing_lat,
-            'listing_beachfront' => $listing_beachfront,
-            'listing_petfriendly' => $listing_petfriendly,
-            'listing_database_date' => current_time( 'mysql')
-        ) 
-    );
-  
-    $wpdb->insert( 
-        $table_name, 
-        array( 
-            'mls_id ' => "2", 
-            'listing_type'=> "B",
-            'listing_name' => "Nombre", 
-            'listing_image' => "url",      
-            'listing_link' =>"url",
-            'listing_preview' => "uprev",  
-            'listing_size'=> "algo",
-            'listing_location'=>"algo",
-            'listing_area' =>"algo",
-            'listing_bedrooms' => "algo",
-            'listing_bathrooms' =>"algo",
-            'listing_address' => "algo",
-            'listing_price' => "algo",
-            'listing_long' => "algo",
-            'listing_lat' => "algo",
-            'listing_beachfront' => "algo",
-            'listing_petfriendly' => "algo",
-            'listing_database_date' => current_time( 'mysql')
-        ) 
-    );
-     */
   
    
-    $filename='data/allrecords';
-    $url = 'http://coachran.oh.marketing';
+    $filename='data/rets-api';
+    $url = 'https://masdevland.com/';
 	$datosCochranListing = wp_remote_get($url.'/'.$filename);
 	if(is_wp_error($datosCochranListing)){
 		echo  "Error al leer";
