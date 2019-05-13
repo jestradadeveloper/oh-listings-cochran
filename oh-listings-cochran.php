@@ -11,9 +11,14 @@ Author URI: http://oh.marketing
 
 defined('ABSPATH') or die("Sorry just aliens can access to this file");
 
-
+//Plugin Activation
+register_activation_hook( __FILE__, 'oh_listings_cochran' ); 
+register_activation_hook( __FILE__, 'oh_listings_cochran_install_data' ); 
+//define('CR_RUTA',plugin_dir_path(__FILE__));
+//define('CR_NOMBRE','oh_listings_cr');
+ // Create the table
 function oh_listings_cochran() {
-    // aqui crearemos la tabla
+   
     global $wpdb;
     $nombreTabla = $wpdb->prefix . "property";
     $charset_collate = $wpdb->get_charset_collate();
@@ -41,6 +46,9 @@ function oh_listings_cochran() {
       listing_lat varchar(150),
       listing_beachfront varchar(100),
       listing_petfriendly varchar(10),
+      listing_agent varchar(100),
+      listing_thumb varchar(100),
+      listing_timestamp datetime,
       listing_database_date date,
       PRIMARY KEY (ID)
     ) $charset_collate;"
@@ -83,6 +91,9 @@ function oh_listings_cochran_install_data() {
             $listing_headline= $post['headline'];
             $listing_subheadline= $post['subheadline'];
             $listing_preconstruction = $post['preconstruction'];
+            $listing_agent= $post['agent'];
+            $listing_thumb= $post['thumbnail'];
+            $listing_timestamp= $post['timestamp'];
             $wpdb->insert( 
                 $table_name, 
                 array( 
@@ -106,6 +117,9 @@ function oh_listings_cochran_install_data() {
                     'listing_lat' => $listing_lat,
                     'listing_beachfront' => $listing_beachfront,
                     'listing_petfriendly' => $listing_petfriendly,
+                    'listing_agent'=> $listing_agent,
+                    'listing_thumb'=>$listing_thumb,
+                    'listing_timestamp'=>$listing_timestamp,
                     'listing_database_date' => current_time( 'mysql')
                 ) 
             );
@@ -117,7 +131,19 @@ function oh_listings_cochran_install_data() {
 
 
 }
-register_activation_hook( __FILE__, 'oh_listings_cochran' ); 
-register_activation_hook( __FILE__, 'oh_listings_cochran_install_data' ); 
+
+
+register_deactivation_hook( __FILE__, 'oh_listings_cochran_deactivation' );
+//when user deactive the plugin
+function oh_listings_cochran_deactivation(){
+    global $wpdb;
+    $table_name_prepared = $wpdb->prefix . "property";
+    $the_removal_query = "DROP TABLE IF EXISTS {$table_name_prepared}";
+    $wpdb->query( $the_removal_query );
+    
+    }
+
+    	
+//include(CR_RUTA.'/includes/options.php');
 
 
