@@ -4,7 +4,7 @@
 Plugin Name: OH MLS Listings Cochran Plugin
 Plugin URI:  
 Description: Plugin with all the property data from RETS mls
-Author: Jose Maria Estrada
+Author: Jose Estrada
 Version: 0.1
 Author URI: http://oh.marketing
 */
@@ -56,15 +56,11 @@ function oh_listings_cochran() {
 }
 
 
-
 function oh_listings_cochran_install_data() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'property';
-  
-   
-    $filename='retslist.json';
     $url = 'https://rets-api.herokuapp.com';
-	$datosCochranListing = wp_remote_get($url.'/'.$filename);
+	$datosCochranListing = wp_remote_get($url);
 	if(is_wp_error($datosCochranListing)){
 		echo  "Error al leer";
 	} else {
